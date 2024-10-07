@@ -10,6 +10,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
@@ -17,10 +18,44 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   void dispose() {
+    _usernameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
     super.dispose();
+  }
+
+  void _showModal(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('User Information'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Username: ${_usernameController.text}'),
+                Text('Email: ${_emailController.text}'),
+                Text('Password: ${_passwordController.text}'),
+                Text('Confirm Password: ${_confirmPasswordController.text}'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                );
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -54,6 +89,7 @@ class _RegisterPageState extends State<RegisterPage> {
             Container(
               margin: const EdgeInsets.only(bottom: 8.0),
               child: TextField(
+                controller: _usernameController,
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
                   labelText: 'Username',
@@ -69,6 +105,7 @@ class _RegisterPageState extends State<RegisterPage> {
             Container(
               margin: const EdgeInsets.only(bottom: 8.0),
               child: TextField(
+                controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
                   labelText: 'Email',
@@ -84,6 +121,7 @@ class _RegisterPageState extends State<RegisterPage> {
             Container(
               margin: const EdgeInsets.only(bottom: 8.0),
               child: TextField(
+                controller: _passwordController,
                 obscureText: true,
                 decoration: const InputDecoration(
                   labelText: 'Password',
@@ -99,6 +137,7 @@ class _RegisterPageState extends State<RegisterPage> {
             Container(
               margin: const EdgeInsets.only(bottom: 20.0),
               child: TextField(
+                controller: _confirmPasswordController,
                 obscureText: true,
                 decoration: const InputDecoration(
                   labelText: 'Confirm Password',
@@ -124,12 +163,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const LoginPage()),
-                  );
+                  _showModal(context);
                 },
-                child: const Text(  
+                child: const Text(
                   'Sign Up',
                   style: TextStyle(color: Colors.black),
                 ),

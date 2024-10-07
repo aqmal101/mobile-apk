@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/pages/home.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -10,17 +11,42 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final TextEditingController _emailController = TextEditingController();
+  // final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
 
   @override
   void dispose() {
-    _emailController.dispose();
+    // _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
     super.dispose();
+  }
+
+  bool _isPasswordVisible = false;
+
+  void _showData() {
+    String username = _userNameController.text;
+    String password = _passwordController.text;
+
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Data Akun'),
+            content: Text('Username: $username\nPassword: $password'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        });
   }
 
   @override
@@ -54,12 +80,15 @@ class _LoginPageState extends State<LoginPage> {
             Container(
               margin: const EdgeInsets.only(bottom: 8.0),
               child: TextField(
+                controller: _userNameController,
                 keyboardType: TextInputType.text,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Username',
                   hintText: 'Masukkan username Anda',
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.account_box),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(22.0),
+                  ),
+                  // prefixIcon: const Icon(Icons.account_box),
                 ),
                 onChanged: (text) {
                   // Aksi yang dijalankan ketika teks berubah
@@ -67,14 +96,29 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(bottom: 22.0),
+              margin: const EdgeInsets.only(bottom: 22.0, top: 11.0),
               child: TextField(
-                obscureText: true,
-                decoration: const InputDecoration(
+                controller: _passwordController,
+                obscureText: !_isPasswordVisible,
+                decoration: InputDecoration(
                   labelText: 'Password',
                   hintText: 'Masukkan sandi Anda',
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.password),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(22.0),
+                  ),
+                  // prefixIcon: const Icon(Icons.lock),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _isPasswordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _isPasswordVisible = !_isPasswordVisible;
+                      });
+                    },
+                  ),
                 ),
                 onChanged: (text) {
                   // Aksi yang dijalankan ketika teks berubah
@@ -86,22 +130,28 @@ class _LoginPageState extends State<LoginPage> {
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.limeAccent, // Background color
+                  backgroundColor: Colors.orange, // Background color
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius
-                        .zero, // Set radius to zero for square corners
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                        50.0), // Set radius for rounded corners
                   ),
                 ),
                 onPressed: () {
+                  _showData();
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const MyApp()),
+                    MaterialPageRoute(builder: (context) => const HomePage()),
                   );
                 },
                 child: const Text(
                   'Sign In',
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold, // Change font weight
+                    fontSize: 18.0, // Change font size
+                    fontFamily: 'Roboto', // Change font family
+                  ),
                 ),
               ),
             ),

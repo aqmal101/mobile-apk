@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/pages/home.dart';
+import 'package:flutter_application_1/pages/base_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -141,7 +141,7 @@ class _LoginPageState extends State<LoginPage> {
                   _showData();
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const HomePage()),
+                    MaterialPageRoute(builder: (context) => const BasePage()),
                   );
                 },
                 child: const Text(

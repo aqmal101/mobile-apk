@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/base_page.dart';
 import 'package:flutter_application_1/pages/login.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -196,7 +197,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const LoginPage()),
+                    MaterialPageRoute(builder: (context) => const BasePage()),
                   );
                 },
                 // child: const Text(

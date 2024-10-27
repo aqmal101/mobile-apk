@@ -115,6 +115,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             GFButton(
               fullWidthButton: true,
+              color: Colors.orange,
               shape: GFButtonShape.pills,
               onPressed: () {
                 Navigator.push(

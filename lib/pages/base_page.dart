@@ -54,32 +54,47 @@ class _BottomNavBarState extends State<BottomNavBar> {
     return Scaffold(
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(
+              _selectedIndex == 0 ? Icons.home : Icons.home_outlined,
+              color: _selectedIndex == 0 ? Colors.orange : Colors.grey,
+            ),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.library_books),
+            icon: Icon(
+              _selectedIndex == 1
+                  ? Icons.library_music
+                  : Icons.library_music_outlined,
+              color: _selectedIndex == 1 ? Colors.orange : Colors.grey,
+            ),
             label: 'Library',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.explore),
+            icon: Icon(
+              _selectedIndex == 2 ? Icons.explore : Icons.explore_outlined,
+              color: _selectedIndex == 2 ? Colors.orange : Colors.grey,
+            ),
             label: 'Discover',
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.group,
+              _selectedIndex == 3 ? Icons.group : Icons.group_outlined,
+              color: _selectedIndex == 3 ? Colors.orange : Colors.grey,
             ),
             label: 'Community',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(
+              _selectedIndex == 4 ? Icons.person : Icons.person_outline,
+              color: _selectedIndex == 4 ? Colors.orange : Colors.grey,
+            ),
             label: 'Profile',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue,
+        selectedItemColor: Colors.orange,
         onTap: _onItemTapped,
       ),
     );

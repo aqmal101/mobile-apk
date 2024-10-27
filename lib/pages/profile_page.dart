@@ -9,7 +9,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.only(top: 60, right: 20, left: 20),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -19,21 +19,16 @@ class ProfilePage extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(15)),
                     shape: BoxShape.rectangle,
                     border: Border.all(
-                      color: Colors.blueAccent, // Border color
+                      color: Colors.orange, // Border color
                       width: 2, // Border width
                     ),
                   ),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        padding: const EdgeInsets.all(
-                            4), // Space between avatar and border
-
+                        padding: const EdgeInsets.all(4),
                         child: GFAvatar(
-                          backgroundImage: NetworkImage(
-                              'https://raw.githubusercontent.com/aqmal101/background-image/refs/heads/main/%CA%9A%C9%9E.jpeg'),
-                          size: GFSize.LARGE,
                           child: Stack(
                             children: [
                               GFAvatar(

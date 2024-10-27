@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/main.dart';
+// import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/pages/base_page.dart';
+import 'package:getwidget/getwidget.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -125,34 +126,18 @@ class _LoginPageState extends State<LoginPage> {
                 },
               ),
             ),
-            SizedBox(
-              height: 48.0, // Adjust the height as needed
-              width: double.infinity,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.orange,
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50.0),
-                  ),
-                ),
-                onPressed: () {
-                  _showData();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const BasePage()),
-                  );
-                },
-                child: const Text(
-                  'Sign In',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18.0,
-                    fontFamily: 'Roboto',
-                  ),
-                ),
-              ),
+            GFButton(
+              fullWidthButton: true,
+              shape: GFButtonShape.pills,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const BasePage()),
+                );
+              },
+              color: Colors.orange,
+              size: GFSize.LARGE,
+              text: "Sign Up",
             ),
           ],
         ),

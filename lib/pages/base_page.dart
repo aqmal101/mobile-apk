@@ -68,7 +68,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
             label: 'Discover',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.group),
+            icon: Icon(
+              Icons.group,
+            ),
             label: 'Community',
           ),
           BottomNavigationBarItem(
@@ -77,8 +79,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blueAccent,
-        unselectedItemColor: Colors.grey,
+        selectedItemColor: Colors.blue,
         onTap: _onItemTapped,
       ),
     );

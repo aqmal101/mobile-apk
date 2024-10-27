@@ -130,11 +130,10 @@ class _LoginPageState extends State<LoginPage> {
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.orange, // Background color
+                  backgroundColor: Colors.orange,
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                        50.0), // Set radius for rounded corners
+                    borderRadius: BorderRadius.circular(50.0),
                   ),
                 ),
                 onPressed: () {
@@ -148,9 +147,9 @@ class _LoginPageState extends State<LoginPage> {
                   'Sign In',
                   style: TextStyle(
                     color: Colors.white,
-                    fontWeight: FontWeight.bold, // Change font weight
-                    fontSize: 18.0, // Change font size
-                    fontFamily: 'Roboto', // Change font family
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18.0,
+                    fontFamily: 'Roboto',
                   ),
                 ),
               ),

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/base_page.dart';
 import 'package:flutter_application_1/pages/login.dart';
+import 'package:getwidget/getwidget.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _RegisterPageState createState() => _RegisterPageState();
 }
 
@@ -70,107 +71,59 @@ class _RegisterPageState extends State<RegisterPage> {
             Container(
               margin: const EdgeInsets.only(bottom: 4.0),
               child: Align(
-                alignment: Alignment.center, // Mengatur align ke tengah
+                alignment: Alignment.center,
                 child: Text(
                   'SIGN UP',
-                  style: Theme.of(context).textTheme.titleLarge,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
               ),
             ),
             Container(
               margin: const EdgeInsets.only(bottom: 20.0),
               child: Align(
-                alignment: Alignment.center, // Mengatur align ke tengah
+                alignment: Alignment.center,
                 child: Text(
                   'Create your account',
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
               ),
             ),
-            Container(
-              margin: const EdgeInsets.only(bottom: 8.0),
-              child: TextField(
-                controller: _usernameController,
-                keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  labelText: 'Username',
-                  hintText: 'Masukkan username Anda',
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.account_box),
-                ),
-                onChanged: (text) {
-                  // Aksi yang dijalankan ketika teks berubah
-                },
-              ),
+            _buildTextField(
+              controller: _usernameController,
+              label: 'Username',
+              icon: Icons.account_box,
             ),
-            Container(
-              margin: const EdgeInsets.only(bottom: 8.0),
-              child: TextField(
-                controller: _emailController,
-                keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  labelText: 'Email',
-                  hintText: 'Masukkan email Anda',
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.email),
-                ),
-                onChanged: (text) {
-                  // Aksi yang dijalankan ketika teks berubah
-                },
-              ),
+            _buildTextField(
+              controller: _emailController,
+              label: 'Email',
+              icon: Icons.email,
+              keyboardType: TextInputType.emailAddress,
             ),
-            Container(
-              margin: const EdgeInsets.only(bottom: 8.0),
-              child: TextField(
-                controller: _passwordController,
-                obscureText: true,
-                decoration: const InputDecoration(
-                  labelText: 'Password',
-                  hintText: 'Masukkan sandi Anda',
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.lock),
-                ),
-                onChanged: (text) {
-                  // Aksi yang dijalankan ketika teks berubah
-                },
-              ),
+            _buildTextField(
+              controller: _passwordController,
+              label: 'Password',
+              icon: Icons.lock,
+              isPassword: true,
             ),
-            Container(
-              margin: const EdgeInsets.only(bottom: 20.0),
-              child: TextField(
-                controller: _confirmPasswordController,
-                obscureText: true,
-                decoration: const InputDecoration(
-                  labelText: 'Confirm Password',
-                  hintText: 'Masukkan sandi Anda',
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.password),
-                ),
-                onChanged: (text) {
-                  // Aksi yang dijalankan ketika teks berubah
-                },
-              ),
+            _buildTextField(
+              controller: _confirmPasswordController,
+              label: 'Confirm Password',
+              icon: Icons.password,
+              isPassword: true,
             ),
-            SizedBox(
-              height: 48.0, // Adjust the height as needed
-              width: double.infinity,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.limeAccent, // Background color
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius
-                        .zero, // Set radius to zero for square corners
-                  ),
-                ),
-                onPressed: () {
-                  _showModal(context);
-                },
-                child: const Text(
-                  'Sign Up',
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
+            GFButton(
+              fullWidthButton: true,
+              shape: GFButtonShape.pills,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const BasePage()),
+                );
+              },
+              size: GFSize.LARGE,
+              text: "Sign Up",
             ),
             Container(
               margin: const EdgeInsets.only(top: 12.0, bottom: 12.0),
@@ -182,41 +135,52 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 48.0, // Adjust the height as needed
-              width: double.infinity,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white, // Background color
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius
-                        .zero, // Set radius to zero for square corners
-                  ),
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const BasePage()),
-                  );
-                },
-                // child: const Text(
-                //   'Sign In with Google',
-                //   style: TextStyle(color: Colors.black),
-                // ),
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(width: 8.0), // Spacing between icon and text
-                    Text(
-                      'Sign In with Google',
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ],
-                ),
+            GFButton(
+              fullWidthButton: true,
+              shape: GFButtonShape.pills,
+              type: GFButtonType.solid,
+              color: GFColors.WHITE,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const BasePage()),
+                );
+              },
+              size: GFSize.LARGE,
+              text: "Sign in with Google",
+              textColor: GFColors.INFO,
+              icon: SvgPicture.network(
+                'https://raw.githubusercontent.com/aqmal101/background-image/7a1f3bfa79be5b94763cca52969f9bd50fcf0aac/google.svg',
+                height: 24.0,
+                width: 24.0,
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String label,
+    required IconData icon,
+    bool isPassword = false,
+    TextInputType keyboardType = TextInputType.text,
+  }) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12.0),
+      child: TextField(
+        controller: controller,
+        obscureText: isPassword,
+        keyboardType: keyboardType,
+        decoration: InputDecoration(
+          labelText: label,
+          hintText: 'Enter your $label',
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(22.0),
+          ),
+          prefixIcon: Icon(icon),
         ),
       ),
     );

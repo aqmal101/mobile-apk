@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/pages/setting_page.dart';
 import 'package:getwidget/getwidget.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -94,20 +95,42 @@ class ProfilePage extends StatelessWidget {
                     ],
                   )),
               const SizedBox(height: 20),
-              GFButton(
-                  fullWidthButton: true,
-                  shape: GFButtonShape.pills,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const MyApp()),
-                    );
-                  },
-                  text: "Logout",
-                  color: GFColors.DANGER,
-                  icon: Icon(
-                    Icons.logout_outlined,
-                  )),
+              Column(
+                children: <Widget>[
+                  GFButton(
+                      fullWidthButton: true,
+                      shape: GFButtonShape.pills,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SettingPage()),
+                        );
+                      },
+                      text: "Setting",
+                      textColor: Colors.black,
+                      color: GFColors.WHITE,
+                      icon: Icon(
+                        Icons.settings,
+                      )),
+                  GFButton(
+                      fullWidthButton: true,
+                      shape: GFButtonShape.pills,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MyApp()),
+                        );
+                      },
+                      text: "Logout",
+                      color: GFColors.DANGER,
+                      icon: Icon(
+                        Icons.logout_outlined,
+                        color: Colors.white,
+                      )),
+                ],
+              ),
             ],
           ),
         ),

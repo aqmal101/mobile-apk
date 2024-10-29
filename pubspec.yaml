@@ -38,6 +38,7 @@ dependencies:
   getwidget: ^4.0.0
   flutter_svg: ^1.1.1
   flutter_emoji: ^2.5.1
+  shared_preferences: ^2.3.2
 
 dev_dependencies:
   flutter_test:

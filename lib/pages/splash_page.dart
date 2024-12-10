@@ -4,6 +4,8 @@ import 'package:flutter_application_1/pages/register.dart';
 import 'package:getwidget/getwidget.dart';
 
 class SplashPage extends StatelessWidget {
+  const SplashPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

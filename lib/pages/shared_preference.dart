@@ -6,6 +6,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,6 +17,8 @@ class MyApp extends StatelessWidget {
 }
 
 class ColorChangerScreen extends StatefulWidget {
+  const ColorChangerScreen({super.key});
+
   @override
   _ColorChangerScreenState createState() => _ColorChangerScreenState();
 }
@@ -104,7 +108,7 @@ class ColorButton extends StatelessWidget {
   final Color color;
   final VoidCallback onPressed;
 
-  ColorButton({required this.color, required this.onPressed});
+  const ColorButton({super.key, required this.color, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {

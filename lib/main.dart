@@ -1,21 +1,25 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/login.dart';
 import 'package:flutter_application_1/pages/register.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter_application_1/pages/splash_page.dart';
+import 'package:flutter_application_1/providers/auth_provider.dart';
 import 'package:getwidget/getwidget.dart';
-
+import 'package:provider/provider.dart';
+import 'providers/auth_provider.dart';
 import 'pages/base_page.dart';
 
 void main() {
-  runApp(
-    DevicePreview(
-      enabled: true,
-      builder: (context) => const MyApp(),
-    ),
-  );
+  runApp(MultiProvider(
+    providers: [ChangeNotifierProvider(create: (_) => AuthProvider())],
+    child: DevicePreview(builder: (context) => const MyApp()),
+  )
+      // DevicePreview(
+      //   enabled: true,
+      //   builder: (context) => const MyApp(),
+      // ),
+      );
 }
 
 class MyApp extends StatelessWidget {

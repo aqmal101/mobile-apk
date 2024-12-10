@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_application_1/main.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_application_1/pages/base_page.dart';
 import 'package:getwidget/getwidget.dart';
+import '../providers/auth_provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -13,7 +14,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   // final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _userNameController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
@@ -27,28 +28,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   bool _isPasswordVisible = false;
-
-  void _showData() {
-    String username = _userNameController.text;
-    String password = _passwordController.text;
-
-    showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: const Text('Data Akun'),
-            content: Text('Username: $username\nPassword: $password'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text('OK'),
-              ),
-            ],
-          );
-        });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
             Container(
               margin: const EdgeInsets.only(bottom: 8.0),
               child: TextField(
-                controller: _userNameController,
+                controller: _usernameController,
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   labelText: 'Username',
@@ -129,12 +108,32 @@ class _LoginPageState extends State<LoginPage> {
             GFButton(
               fullWidthButton: true,
               shape: GFButtonShape.pills,
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const BasePage()),
-                );
+              onPressed: () async {
+                final username = _usernameController.text;
+                final password = _passwordController.text;
+
+                try {
+                  await Provider.of<AuthProvider>(context, listen: false)
+                      .login(username, password);
+
+                  if (Provider.of<AuthProvider>(context, listen: false)
+                      .isAuthenticated) {
+                    Navigator.pushReplacementNamed(context, '/home');
+                  }
+                } catch (error) {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text('Login failed: $error'),
+                  ));
+                }
               },
+              // {
+
+              //   Navigator.push(
+              //     context,
+              //     MaterialPageRoute(builder: (context) => const BasePage()),
+              //   );
+              // },
+
               color: Colors.orange,
               size: GFSize.LARGE,
               text: "Sign Up",
